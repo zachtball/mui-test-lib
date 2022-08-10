@@ -10,7 +10,14 @@ const __dirname = dirname(__filename);
 const externals = Object.keys(pkg.peerDependencies);
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
+  ],
   build: {
     minify: false,
     lib: {
