@@ -23,7 +23,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.tsx'),
       name: 'MyLib',
-      formats: ['es', 'umd'],
+      formats: ['es'],
       fileName: 'index',
     },
     rollupOptions: {
