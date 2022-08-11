@@ -7,7 +7,15 @@ import { dirname, resolve } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const externals = Object.keys(pkg.peerDependencies);
+const makeExternalPredicate = (externalArr: string[]) => {
+  if (externalArr.length === 0) {
+    return () => false;
+  }
+  const pattern = new RegExp(`^(${externalArr.join('|')})($|/)`);
+  return (id: string) => pattern.test(id);
+};
+
+const externals = makeExternalPredicate(Object.keys(pkg.peerDependencies));
 
 export default defineConfig({
   plugins: [
